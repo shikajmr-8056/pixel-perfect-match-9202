@@ -32,7 +32,7 @@ function useBrowserOnline() {
   return online;
 }
 
-function NavLinkItem({ item, onNavigate }: { item: NavItem; onNavigate?: () => void }) {
+function NavLinkItem({ item, onNavigate }: { item: NavItem; onNavigate?: (() => void) | undefined }) {
   const { language } = useDemo();
   const Icon = item.icon;
   return (
@@ -48,7 +48,7 @@ function NavLinkItem({ item, onNavigate }: { item: NavItem; onNavigate?: () => v
   );
 }
 
-function NavList({ onNavigate }: { onNavigate?: () => void }) {
+function NavList({ onNavigate }: { onNavigate?: (() => void) | undefined }) {
   return (
     <nav aria-label="Main" className="flex flex-col gap-0.5">
       {primaryNav.map((i) => <NavLinkItem key={i.to} item={i} onNavigate={onNavigate} />)}
