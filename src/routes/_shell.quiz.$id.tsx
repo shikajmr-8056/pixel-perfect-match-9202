@@ -30,7 +30,7 @@ function Quiz() {
   const [answers, setAnswers] = useState<(number | null)[]>(() => qs.map(() => null));
   const [submitted, setSubmitted] = useState<boolean[]>(() => qs.map(() => false));
   const [finished, setFinished] = useState(false);
-  const q = qs[i];
+  const q = qs[i]!;
   const pick = answers[i];
   const isSub = submitted[i];
 

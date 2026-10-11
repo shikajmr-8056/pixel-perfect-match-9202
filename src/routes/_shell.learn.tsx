@@ -67,9 +67,25 @@ function Library() {
       {curriculum !== "NCERT-aligned" && <p className="mb-4 text-sm text-muted-foreground">Board-specific ordering is not in the demo yet. Showing the same sample lessons.</p>}
 
       <div className="mb-6 flex gap-2 overflow-x-auto pb-1" role="tablist" aria-label="Subjects">
-        {(["All", ...subjects] as const).map((s) => (
-          <button key={s} role="tab" aria-selected={subject === s} onClick={() => setSubject(s)} className={cn("h-9 shrink-0 rounded-lg border px-3 text-sm font-medium", subject === s ? "border-saffron bg-saffron-soft text-saffron-foreground" : "bg-card text-muted-foreground hover:text-foreground")}>{s}</button>
-        ))}
+        {(["All", ...subjects] as const).map((s) => {
+          const isActive = subject === s;
+          return (
+            <button
+              key={s}
+              role="tab"
+              aria-selected={isActive}
+              onClick={() => setSubject(s)}
+              className={cn(
+                "h-9 shrink-0 rounded-lg px-4 text-xs font-bold transition-all shadow-sm",
+                isActive
+                  ? "bg-[#6541F5] text-white shadow-[#6541F5]/25"
+                  : "bg-card border border-border text-muted-foreground hover:text-foreground hover:border-[#6541F5]/40"
+              )}
+            >
+              {s}
+            </button>
+          );
+        })}
       </div>
 
       {list.length === 0 ? (
@@ -83,19 +99,56 @@ function Library() {
         <div className="space-y-8">
           {chapters.map((ch) => (
             <section key={ch}>
-              <h2 className="mb-3 text-lg font-semibold">{ch}</h2>
-              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              <h2 className="mb-3 text-base font-bold text-foreground">{ch}</h2>
+              <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
                 {list.filter((l) => l.chapter === ch).map((l) => {
                   const done = d.completed.includes(l.id);
                   const offline = d.downloads[packOf[l.subject]] === "saved";
+
+                  // Subject colorful tag mapping
+                  const subjectStyles: Record<string, { bg: string; text: string; border: string }> = {
+                    Mathematics: { bg: "#DDF2FC", text: "#42A5E8", border: "#42A5E8" },
+                    Science: { bg: "#DDF8EE", text: "#19B99A", border: "#19B99A" },
+                    Computing: { bg: "#EAE7FF", text: "#6541F5", border: "#6541F5" },
+                    "Social Science": { bg: "#FFF0D5", text: "#F5A623", border: "#F5A623" },
+                    English: { bg: "#FCE5EB", text: "#E95778", border: "#E95778" },
+                  };
+                  const style = subjectStyles[l.subject] || { bg: "#EAE7FF", text: "#6541F5", border: "#6541F5" };
+
                   return (
-                    <Link key={l.id} to="/lesson/$id" params={{ id: l.id }} className="card-surface flex flex-col p-4 transition-colors hover:border-primary/40">
-                      <div className="flex items-center justify-between text-xs"><span className="font-semibold text-teal-strong">{l.subject}</span>{done && <span className="inline-flex items-center gap-1 text-success"><CheckCircle2 className="h-3.5 w-3.5" />Done</span>}</div>
-                      <p className="mt-2 font-medium">{l.title}</p>
-                      <div className="mt-auto flex flex-wrap items-center gap-3 pt-4 text-xs text-muted-foreground">
-                        <span className="inline-flex items-center gap-1"><Clock className="h-3.5 w-3.5" />{l.durationMin} min</span>
-                        <span>{l.type}</span>
-                        <span className="inline-flex items-center gap-1"><Download className="h-3.5 w-3.5" />{offline ? "In a downloaded pack" : `${l.sizeMb} MB`}</span>
+                    <Link
+                      key={l.id}
+                      to="/lesson/$id"
+                      params={{ id: l.id }}
+                      className="card-surface flex flex-col p-4.5 rounded-xl transition-all hover:border-[#6541F5]/40 hover:shadow-md"
+                    >
+                      <div className="flex items-center justify-between text-xs">
+                        <span
+                          className="rounded-md px-2 py-0.5 text-[11px] font-bold"
+                          style={{
+                            backgroundColor: style.bg,
+                            color: style.text,
+                            border: `1px solid ${style.border}30`,
+                          }}
+                        >
+                          {l.subject}
+                        </span>
+                        {done && (
+                          <span className="inline-flex items-center gap-1 font-semibold text-[#28B987] text-[11px]">
+                            <CheckCircle2 className="h-3.5 w-3.5" /> Done
+                          </span>
+                        )}
+                      </div>
+                      <p className="mt-2.5 font-bold text-sm text-foreground leading-snug">{l.title}</p>
+                      <div className="mt-auto flex flex-wrap items-center gap-3 pt-4 text-xs text-muted-foreground font-medium">
+                        <span className="inline-flex items-center gap-1">
+                          <Clock className="h-3.5 w-3.5 text-[#42A5E8]" /> {l.durationMin} min
+                        </span>
+                        <span className="rounded bg-muted px-1.5 py-0.5 text-[10px]">{l.type}</span>
+                        <span className="inline-flex items-center gap-1">
+                          <Download className="h-3.5 w-3.5 text-[#19B99A]" />
+                          {offline ? "In downloaded pack" : `${l.sizeMb} MB`}
+                        </span>
                       </div>
                     </Link>
                   );

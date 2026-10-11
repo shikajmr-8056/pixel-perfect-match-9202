@@ -13,11 +13,24 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ShellRouteImport } from './routes/_shell'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as ShellChallengesRouteImport } from './routes/_shell.challenges'
+import { Route as ShellCircuitverseRouteImport } from './routes/_shell.circuitverse'
 import { Route as ShellClassroomsRouteImport } from './routes/_shell.classrooms'
+import { Route as ShellCodeverseRouteImport } from './routes/_shell.codeverse'
 import { Route as ShellDashboardRouteImport } from './routes/_shell.dashboard'
+import { Route as ShellDownloadsRouteImport } from './routes/_shell.downloads'
+import { Route as ShellLeaderboardRouteImport } from './routes/_shell.leaderboard'
 import { Route as ShellLearnRouteImport } from './routes/_shell.learn'
+import { Route as ShellMeshRouteImport } from './routes/_shell.mesh'
+import { Route as ShellParentRouteImport } from './routes/_shell.parent'
+import { Route as ShellPlaylabRouteImport } from './routes/_shell.playlab'
 import { Route as ShellProgressRouteImport } from './routes/_shell.progress'
+import { Route as ShellProjectsRouteImport } from './routes/_shell.projects'
+import { Route as ShellRewardsRouteImport } from './routes/_shell.rewards'
 import { Route as ShellSettingsRouteImport } from './routes/_shell.settings'
+import { Route as ShellTeacherRouteImport } from './routes/_shell.teacher'
+import { Route as ShellTutorRouteImport } from './routes/_shell.tutor'
+import { Route as ShellVoiceRouteImport } from './routes/_shell.voice'
 import { Route as ShellLessonIdRouteImport } from './routes/_shell.lesson.$id'
 import { Route as ShellQuizIdRouteImport } from './routes/_shell.quiz.$id'
 
@@ -40,9 +53,24 @@ const TermsRoute = TermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ShellChallengesRoute = ShellChallengesRouteImport.update({
+  id: '/challenges',
+  path: '/challenges',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellCircuitverseRoute = ShellCircuitverseRouteImport.update({
+  id: '/circuitverse',
+  path: '/circuitverse',
+  getParentRoute: () => ShellRoute,
+} as any)
 const ShellClassroomsRoute = ShellClassroomsRouteImport.update({
   id: '/classrooms',
   path: '/classrooms',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellCodeverseRoute = ShellCodeverseRouteImport.update({
+  id: '/codeverse',
+  path: '/codeverse',
   getParentRoute: () => ShellRoute,
 } as any)
 const ShellDashboardRoute = ShellDashboardRouteImport.update({
@@ -50,9 +78,34 @@ const ShellDashboardRoute = ShellDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => ShellRoute,
 } as any)
+const ShellDownloadsRoute = ShellDownloadsRouteImport.update({
+  id: '/downloads',
+  path: '/downloads',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellLeaderboardRoute = ShellLeaderboardRouteImport.update({
+  id: '/leaderboard',
+  path: '/leaderboard',
+  getParentRoute: () => ShellRoute,
+} as any)
 const ShellLearnRoute = ShellLearnRouteImport.update({
   id: '/learn',
   path: '/learn',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellMeshRoute = ShellMeshRouteImport.update({
+  id: '/mesh',
+  path: '/mesh',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellParentRoute = ShellParentRouteImport.update({
+  id: '/parent',
+  path: '/parent',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellPlaylabRoute = ShellPlaylabRouteImport.update({
+  id: '/playlab',
+  path: '/playlab',
   getParentRoute: () => ShellRoute,
 } as any)
 const ShellProgressRoute = ShellProgressRouteImport.update({
@@ -60,9 +113,34 @@ const ShellProgressRoute = ShellProgressRouteImport.update({
   path: '/progress',
   getParentRoute: () => ShellRoute,
 } as any)
+const ShellProjectsRoute = ShellProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellRewardsRoute = ShellRewardsRouteImport.update({
+  id: '/rewards',
+  path: '/rewards',
+  getParentRoute: () => ShellRoute,
+} as any)
 const ShellSettingsRoute = ShellSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellTeacherRoute = ShellTeacherRouteImport.update({
+  id: '/teacher',
+  path: '/teacher',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellTutorRoute = ShellTutorRouteImport.update({
+  id: '/tutor',
+  path: '/tutor',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellVoiceRoute = ShellVoiceRouteImport.update({
+  id: '/voice',
+  path: '/voice',
   getParentRoute: () => ShellRoute,
 } as any)
 const ShellLessonIdRoute = ShellLessonIdRouteImport.update({
@@ -80,11 +158,24 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/challenges': typeof ShellChallengesRoute
+  '/circuitverse': typeof ShellCircuitverseRoute
   '/classrooms': typeof ShellClassroomsRoute
+  '/codeverse': typeof ShellCodeverseRoute
   '/dashboard': typeof ShellDashboardRoute
+  '/downloads': typeof ShellDownloadsRoute
+  '/leaderboard': typeof ShellLeaderboardRoute
   '/learn': typeof ShellLearnRoute
+  '/mesh': typeof ShellMeshRoute
+  '/parent': typeof ShellParentRoute
+  '/playlab': typeof ShellPlaylabRoute
   '/progress': typeof ShellProgressRoute
+  '/projects': typeof ShellProjectsRoute
+  '/rewards': typeof ShellRewardsRoute
   '/settings': typeof ShellSettingsRoute
+  '/teacher': typeof ShellTeacherRoute
+  '/tutor': typeof ShellTutorRoute
+  '/voice': typeof ShellVoiceRoute
   '/lesson/$id': typeof ShellLessonIdRoute
   '/quiz/$id': typeof ShellQuizIdRoute
 }
@@ -92,11 +183,24 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/challenges': typeof ShellChallengesRoute
+  '/circuitverse': typeof ShellCircuitverseRoute
   '/classrooms': typeof ShellClassroomsRoute
+  '/codeverse': typeof ShellCodeverseRoute
   '/dashboard': typeof ShellDashboardRoute
+  '/downloads': typeof ShellDownloadsRoute
+  '/leaderboard': typeof ShellLeaderboardRoute
   '/learn': typeof ShellLearnRoute
+  '/mesh': typeof ShellMeshRoute
+  '/parent': typeof ShellParentRoute
+  '/playlab': typeof ShellPlaylabRoute
   '/progress': typeof ShellProgressRoute
+  '/projects': typeof ShellProjectsRoute
+  '/rewards': typeof ShellRewardsRoute
   '/settings': typeof ShellSettingsRoute
+  '/teacher': typeof ShellTeacherRoute
+  '/tutor': typeof ShellTutorRoute
+  '/voice': typeof ShellVoiceRoute
   '/lesson/$id': typeof ShellLessonIdRoute
   '/quiz/$id': typeof ShellQuizIdRoute
 }
@@ -106,11 +210,24 @@ export interface FileRoutesById {
   '/_shell': typeof ShellRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/_shell/challenges': typeof ShellChallengesRoute
+  '/_shell/circuitverse': typeof ShellCircuitverseRoute
   '/_shell/classrooms': typeof ShellClassroomsRoute
+  '/_shell/codeverse': typeof ShellCodeverseRoute
   '/_shell/dashboard': typeof ShellDashboardRoute
+  '/_shell/downloads': typeof ShellDownloadsRoute
+  '/_shell/leaderboard': typeof ShellLeaderboardRoute
   '/_shell/learn': typeof ShellLearnRoute
+  '/_shell/mesh': typeof ShellMeshRoute
+  '/_shell/parent': typeof ShellParentRoute
+  '/_shell/playlab': typeof ShellPlaylabRoute
   '/_shell/progress': typeof ShellProgressRoute
+  '/_shell/projects': typeof ShellProjectsRoute
+  '/_shell/rewards': typeof ShellRewardsRoute
   '/_shell/settings': typeof ShellSettingsRoute
+  '/_shell/teacher': typeof ShellTeacherRoute
+  '/_shell/tutor': typeof ShellTutorRoute
+  '/_shell/voice': typeof ShellVoiceRoute
   '/_shell/lesson/$id': typeof ShellLessonIdRoute
   '/_shell/quiz/$id': typeof ShellQuizIdRoute
 }
@@ -120,11 +237,24 @@ export interface FileRouteTypes {
     | '/'
     | '/privacy'
     | '/terms'
+    | '/challenges'
+    | '/circuitverse'
     | '/classrooms'
+    | '/codeverse'
     | '/dashboard'
+    | '/downloads'
+    | '/leaderboard'
     | '/learn'
+    | '/mesh'
+    | '/parent'
+    | '/playlab'
     | '/progress'
+    | '/projects'
+    | '/rewards'
     | '/settings'
+    | '/teacher'
+    | '/tutor'
+    | '/voice'
     | '/lesson/$id'
     | '/quiz/$id'
   fileRoutesByTo: FileRoutesByTo
@@ -132,11 +262,24 @@ export interface FileRouteTypes {
     | '/'
     | '/privacy'
     | '/terms'
+    | '/challenges'
+    | '/circuitverse'
     | '/classrooms'
+    | '/codeverse'
     | '/dashboard'
+    | '/downloads'
+    | '/leaderboard'
     | '/learn'
+    | '/mesh'
+    | '/parent'
+    | '/playlab'
     | '/progress'
+    | '/projects'
+    | '/rewards'
     | '/settings'
+    | '/teacher'
+    | '/tutor'
+    | '/voice'
     | '/lesson/$id'
     | '/quiz/$id'
   id:
@@ -145,11 +288,24 @@ export interface FileRouteTypes {
     | '/_shell'
     | '/privacy'
     | '/terms'
+    | '/_shell/challenges'
+    | '/_shell/circuitverse'
     | '/_shell/classrooms'
+    | '/_shell/codeverse'
     | '/_shell/dashboard'
+    | '/_shell/downloads'
+    | '/_shell/leaderboard'
     | '/_shell/learn'
+    | '/_shell/mesh'
+    | '/_shell/parent'
+    | '/_shell/playlab'
     | '/_shell/progress'
+    | '/_shell/projects'
+    | '/_shell/rewards'
     | '/_shell/settings'
+    | '/_shell/teacher'
+    | '/_shell/tutor'
+    | '/_shell/voice'
     | '/_shell/lesson/$id'
     | '/_shell/quiz/$id'
   fileRoutesById: FileRoutesById
@@ -191,11 +347,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_shell/challenges': {
+      id: '/_shell/challenges'
+      path: '/challenges'
+      fullPath: '/challenges'
+      preLoaderRoute: typeof ShellChallengesRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/circuitverse': {
+      id: '/_shell/circuitverse'
+      path: '/circuitverse'
+      fullPath: '/circuitverse'
+      preLoaderRoute: typeof ShellCircuitverseRouteImport
+      parentRoute: typeof ShellRoute
+    }
     '/_shell/classrooms': {
       id: '/_shell/classrooms'
       path: '/classrooms'
       fullPath: '/classrooms'
       preLoaderRoute: typeof ShellClassroomsRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/codeverse': {
+      id: '/_shell/codeverse'
+      path: '/codeverse'
+      fullPath: '/codeverse'
+      preLoaderRoute: typeof ShellCodeverseRouteImport
       parentRoute: typeof ShellRoute
     }
     '/_shell/dashboard': {
@@ -205,11 +382,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellDashboardRouteImport
       parentRoute: typeof ShellRoute
     }
+    '/_shell/downloads': {
+      id: '/_shell/downloads'
+      path: '/downloads'
+      fullPath: '/downloads'
+      preLoaderRoute: typeof ShellDownloadsRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/leaderboard': {
+      id: '/_shell/leaderboard'
+      path: '/leaderboard'
+      fullPath: '/leaderboard'
+      preLoaderRoute: typeof ShellLeaderboardRouteImport
+      parentRoute: typeof ShellRoute
+    }
     '/_shell/learn': {
       id: '/_shell/learn'
       path: '/learn'
       fullPath: '/learn'
       preLoaderRoute: typeof ShellLearnRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/mesh': {
+      id: '/_shell/mesh'
+      path: '/mesh'
+      fullPath: '/mesh'
+      preLoaderRoute: typeof ShellMeshRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/parent': {
+      id: '/_shell/parent'
+      path: '/parent'
+      fullPath: '/parent'
+      preLoaderRoute: typeof ShellParentRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/playlab': {
+      id: '/_shell/playlab'
+      path: '/playlab'
+      fullPath: '/playlab'
+      preLoaderRoute: typeof ShellPlaylabRouteImport
       parentRoute: typeof ShellRoute
     }
     '/_shell/progress': {
@@ -219,11 +431,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellProgressRouteImport
       parentRoute: typeof ShellRoute
     }
+    '/_shell/projects': {
+      id: '/_shell/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ShellProjectsRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/rewards': {
+      id: '/_shell/rewards'
+      path: '/rewards'
+      fullPath: '/rewards'
+      preLoaderRoute: typeof ShellRewardsRouteImport
+      parentRoute: typeof ShellRoute
+    }
     '/_shell/settings': {
       id: '/_shell/settings'
       path: '/settings'
       fullPath: '/settings'
       preLoaderRoute: typeof ShellSettingsRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/teacher': {
+      id: '/_shell/teacher'
+      path: '/teacher'
+      fullPath: '/teacher'
+      preLoaderRoute: typeof ShellTeacherRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/tutor': {
+      id: '/_shell/tutor'
+      path: '/tutor'
+      fullPath: '/tutor'
+      preLoaderRoute: typeof ShellTutorRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/voice': {
+      id: '/_shell/voice'
+      path: '/voice'
+      fullPath: '/voice'
+      preLoaderRoute: typeof ShellVoiceRouteImport
       parentRoute: typeof ShellRoute
     }
     '/_shell/lesson/$id': {
@@ -244,21 +491,47 @@ declare module '@tanstack/react-router' {
 }
 
 interface ShellRouteChildren {
+  ShellChallengesRoute: typeof ShellChallengesRoute
+  ShellCircuitverseRoute: typeof ShellCircuitverseRoute
   ShellClassroomsRoute: typeof ShellClassroomsRoute
+  ShellCodeverseRoute: typeof ShellCodeverseRoute
   ShellDashboardRoute: typeof ShellDashboardRoute
+  ShellDownloadsRoute: typeof ShellDownloadsRoute
+  ShellLeaderboardRoute: typeof ShellLeaderboardRoute
   ShellLearnRoute: typeof ShellLearnRoute
+  ShellMeshRoute: typeof ShellMeshRoute
+  ShellParentRoute: typeof ShellParentRoute
+  ShellPlaylabRoute: typeof ShellPlaylabRoute
   ShellProgressRoute: typeof ShellProgressRoute
+  ShellProjectsRoute: typeof ShellProjectsRoute
+  ShellRewardsRoute: typeof ShellRewardsRoute
   ShellSettingsRoute: typeof ShellSettingsRoute
+  ShellTeacherRoute: typeof ShellTeacherRoute
+  ShellTutorRoute: typeof ShellTutorRoute
+  ShellVoiceRoute: typeof ShellVoiceRoute
   ShellLessonIdRoute: typeof ShellLessonIdRoute
   ShellQuizIdRoute: typeof ShellQuizIdRoute
 }
 
 const ShellRouteChildren: ShellRouteChildren = {
+  ShellChallengesRoute: ShellChallengesRoute,
+  ShellCircuitverseRoute: ShellCircuitverseRoute,
   ShellClassroomsRoute: ShellClassroomsRoute,
+  ShellCodeverseRoute: ShellCodeverseRoute,
   ShellDashboardRoute: ShellDashboardRoute,
+  ShellDownloadsRoute: ShellDownloadsRoute,
+  ShellLeaderboardRoute: ShellLeaderboardRoute,
   ShellLearnRoute: ShellLearnRoute,
+  ShellMeshRoute: ShellMeshRoute,
+  ShellParentRoute: ShellParentRoute,
+  ShellPlaylabRoute: ShellPlaylabRoute,
   ShellProgressRoute: ShellProgressRoute,
+  ShellProjectsRoute: ShellProjectsRoute,
+  ShellRewardsRoute: ShellRewardsRoute,
   ShellSettingsRoute: ShellSettingsRoute,
+  ShellTeacherRoute: ShellTeacherRoute,
+  ShellTutorRoute: ShellTutorRoute,
+  ShellVoiceRoute: ShellVoiceRoute,
   ShellLessonIdRoute: ShellLessonIdRoute,
   ShellQuizIdRoute: ShellQuizIdRoute,
 }

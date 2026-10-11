@@ -31,7 +31,8 @@ function LessonPage() {
   const next = chapter[idx + 1];
   const done = d.completed.includes(lesson.id);
   const chapterDone = chapter.filter((l) => d.completed.includes(l.id)).length;
-  const pack = learningPacks.find((p) => p.name.toLowerCase().includes(lesson.subject === "Mathematics" ? "math" : lesson.subject.toLowerCase().split(" ")[0]));
+  const subjectKeyword = lesson.subject === "Mathematics" ? "math" : (lesson.subject.toLowerCase().split(" ")[0] || "");
+  const pack = learningPacks.find((p) => p.name.toLowerCase().includes(subjectKeyword));
   const packState = pack ? d.downloads[pack.id] : undefined;
 
   return (
@@ -91,7 +92,7 @@ function LessonPage() {
               {lessons.filter((l) => l.subject === lesson.subject && l.id !== lesson.id).slice(0, 3).map((l) => (
                 <li key={l.id}><Link to="/lesson/$id" params={{ id: l.id }} className="text-primary hover:underline">{l.title}</Link></li>
               ))}
-              <li><Link to="/concept-detective" className="text-primary hover:underline">Check common mistakes in Concept Detective</Link></li>
+              <li><Link to="/tutor" search={{}} className="text-primary hover:underline">Check common mistakes in Concept Detective</Link></li>
             </ul>
           </Panel>
         </div>
