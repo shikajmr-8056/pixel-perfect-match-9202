@@ -11,11 +11,15 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ShellRouteImport } from './routes/_shell'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ShellClassroomsRouteImport } from './routes/_shell.classrooms'
 import { Route as ShellDashboardRouteImport } from './routes/_shell.dashboard'
 import { Route as ShellLearnRouteImport } from './routes/_shell.learn'
 import { Route as ShellProgressRouteImport } from './routes/_shell.progress'
 import { Route as ShellSettingsRouteImport } from './routes/_shell.settings'
+import { Route as ShellLessonIdRouteImport } from './routes/_shell.lesson.$id'
+import { Route as ShellQuizIdRouteImport } from './routes/_shell.quiz.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -24,6 +28,16 @@ const IndexRoute = IndexRouteImport.update({
 } as any)
 const ShellRoute = ShellRouteImport.update({
   id: '/_shell',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ShellClassroomsRoute = ShellClassroomsRouteImport.update({
@@ -51,53 +65,100 @@ const ShellSettingsRoute = ShellSettingsRouteImport.update({
   path: '/settings',
   getParentRoute: () => ShellRoute,
 } as any)
+const ShellLessonIdRoute = ShellLessonIdRouteImport.update({
+  id: '/lesson/$id',
+  path: '/lesson/$id',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellQuizIdRoute = ShellQuizIdRouteImport.update({
+  id: '/quiz/$id',
+  path: '/quiz/$id',
+  getParentRoute: () => ShellRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
   '/classrooms': typeof ShellClassroomsRoute
   '/dashboard': typeof ShellDashboardRoute
   '/learn': typeof ShellLearnRoute
   '/progress': typeof ShellProgressRoute
   '/settings': typeof ShellSettingsRoute
+  '/lesson/$id': typeof ShellLessonIdRoute
+  '/quiz/$id': typeof ShellQuizIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
   '/classrooms': typeof ShellClassroomsRoute
   '/dashboard': typeof ShellDashboardRoute
   '/learn': typeof ShellLearnRoute
   '/progress': typeof ShellProgressRoute
   '/settings': typeof ShellSettingsRoute
+  '/lesson/$id': typeof ShellLessonIdRoute
+  '/quiz/$id': typeof ShellQuizIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_shell': typeof ShellRouteWithChildren
+  '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
   '/_shell/classrooms': typeof ShellClassroomsRoute
   '/_shell/dashboard': typeof ShellDashboardRoute
   '/_shell/learn': typeof ShellLearnRoute
   '/_shell/progress': typeof ShellProgressRoute
   '/_shell/settings': typeof ShellSettingsRoute
+  '/_shell/lesson/$id': typeof ShellLessonIdRoute
+  '/_shell/quiz/$id': typeof ShellQuizIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/classrooms' | '/dashboard' | '/learn' | '/progress' | '/settings'
+    | '/'
+    | '/privacy'
+    | '/terms'
+    | '/classrooms'
+    | '/dashboard'
+    | '/learn'
+    | '/progress'
+    | '/settings'
+    | '/lesson/$id'
+    | '/quiz/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/classrooms' | '/dashboard' | '/learn' | '/progress' | '/settings'
+  to:
+    | '/'
+    | '/privacy'
+    | '/terms'
+    | '/classrooms'
+    | '/dashboard'
+    | '/learn'
+    | '/progress'
+    | '/settings'
+    | '/lesson/$id'
+    | '/quiz/$id'
   id:
     | '__root__'
     | '/'
     | '/_shell'
+    | '/privacy'
+    | '/terms'
     | '/_shell/classrooms'
     | '/_shell/dashboard'
     | '/_shell/learn'
     | '/_shell/progress'
     | '/_shell/settings'
+    | '/_shell/lesson/$id'
+    | '/_shell/quiz/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ShellRoute: typeof ShellRouteWithChildren
+  PrivacyRoute: typeof PrivacyRoute
+  TermsRoute: typeof TermsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -114,6 +175,20 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof ShellRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_shell/classrooms': {
@@ -151,6 +226,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellSettingsRouteImport
       parentRoute: typeof ShellRoute
     }
+    '/_shell/lesson/$id': {
+      id: '/_shell/lesson/$id'
+      path: '/lesson/$id'
+      fullPath: '/lesson/$id'
+      preLoaderRoute: typeof ShellLessonIdRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/quiz/$id': {
+      id: '/_shell/quiz/$id'
+      path: '/quiz/$id'
+      fullPath: '/quiz/$id'
+      preLoaderRoute: typeof ShellQuizIdRouteImport
+      parentRoute: typeof ShellRoute
+    }
   }
 }
 
@@ -160,6 +249,8 @@ interface ShellRouteChildren {
   ShellLearnRoute: typeof ShellLearnRoute
   ShellProgressRoute: typeof ShellProgressRoute
   ShellSettingsRoute: typeof ShellSettingsRoute
+  ShellLessonIdRoute: typeof ShellLessonIdRoute
+  ShellQuizIdRoute: typeof ShellQuizIdRoute
 }
 
 const ShellRouteChildren: ShellRouteChildren = {
@@ -168,6 +259,8 @@ const ShellRouteChildren: ShellRouteChildren = {
   ShellLearnRoute: ShellLearnRoute,
   ShellProgressRoute: ShellProgressRoute,
   ShellSettingsRoute: ShellSettingsRoute,
+  ShellLessonIdRoute: ShellLessonIdRoute,
+  ShellQuizIdRoute: ShellQuizIdRoute,
 }
 
 const ShellRouteWithChildren = ShellRoute._addFileChildren(ShellRouteChildren)
@@ -175,6 +268,8 @@ const ShellRouteWithChildren = ShellRoute._addFileChildren(ShellRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ShellRoute: ShellRouteWithChildren,
+  PrivacyRoute: PrivacyRoute,
+  TermsRoute: TermsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
