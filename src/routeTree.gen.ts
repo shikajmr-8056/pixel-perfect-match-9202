@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ShellRouteImport } from './routes/_shell'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ShellClassroomsRouteImport } from './routes/_shell.classrooms'
 import { Route as ShellDashboardRouteImport } from './routes/_shell.dashboard'
 import { Route as ShellLearnRouteImport } from './routes/_shell.learn'
@@ -24,6 +26,16 @@ const IndexRoute = IndexRouteImport.update({
 } as any)
 const ShellRoute = ShellRouteImport.update({
   id: '/_shell',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ShellClassroomsRoute = ShellClassroomsRouteImport.update({
@@ -54,6 +66,8 @@ const ShellSettingsRoute = ShellSettingsRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
   '/classrooms': typeof ShellClassroomsRoute
   '/dashboard': typeof ShellDashboardRoute
   '/learn': typeof ShellLearnRoute
@@ -62,6 +76,8 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
   '/classrooms': typeof ShellClassroomsRoute
   '/dashboard': typeof ShellDashboardRoute
   '/learn': typeof ShellLearnRoute
@@ -72,6 +88,8 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_shell': typeof ShellRouteWithChildren
+  '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
   '/_shell/classrooms': typeof ShellClassroomsRoute
   '/_shell/dashboard': typeof ShellDashboardRoute
   '/_shell/learn': typeof ShellLearnRoute
@@ -81,13 +99,30 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/classrooms' | '/dashboard' | '/learn' | '/progress' | '/settings'
+    | '/'
+    | '/privacy'
+    | '/terms'
+    | '/classrooms'
+    | '/dashboard'
+    | '/learn'
+    | '/progress'
+    | '/settings'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/classrooms' | '/dashboard' | '/learn' | '/progress' | '/settings'
+  to:
+    | '/'
+    | '/privacy'
+    | '/terms'
+    | '/classrooms'
+    | '/dashboard'
+    | '/learn'
+    | '/progress'
+    | '/settings'
   id:
     | '__root__'
     | '/'
     | '/_shell'
+    | '/privacy'
+    | '/terms'
     | '/_shell/classrooms'
     | '/_shell/dashboard'
     | '/_shell/learn'
@@ -98,6 +133,8 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ShellRoute: typeof ShellRouteWithChildren
+  PrivacyRoute: typeof PrivacyRoute
+  TermsRoute: typeof TermsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -114,6 +151,20 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof ShellRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_shell/classrooms': {
@@ -175,6 +226,8 @@ const ShellRouteWithChildren = ShellRoute._addFileChildren(ShellRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ShellRoute: ShellRouteWithChildren,
+  PrivacyRoute: PrivacyRoute,
+  TermsRoute: TermsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
