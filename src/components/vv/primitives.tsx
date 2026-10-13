@@ -28,7 +28,7 @@ export function Logo({ className, inverse = false }: { className?: string; inver
 
 export function DemoTag({ children = "Demo profile", className }: { children?: ReactNode; className?: string }) {
   return (
-    <span className={cn("inline-flex items-center rounded-md border border-[#D8D5FF] bg-[#D8D5FF]/35 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#5230E8] dark:border-[#7C5CFA]/30 dark:bg-[#7C5CFA]/15 dark:text-[#D8D5FF]", className)}>
+    <span className={cn("inline-flex items-center rounded-md border border-[#EAE7FF] bg-[#EAE7FF]/60 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#5230E8] dark:border-[#7C5CFA]/30 dark:bg-[#7C5CFA]/15 dark:text-[#D8D5FF]", className)}>
       {children}
     </span>
   );
@@ -36,9 +36,9 @@ export function DemoTag({ children = "Demo profile", className }: { children?: R
 
 export function NetworkTag({ status = "online", className }: { status?: "online" | "mesh" | "offline"; className?: string }) {
   const cfg = {
-    online: { label: "Browser online · Demo mode", border: "border-[#31B98A]/30", bg: "bg-[#31B98A]/10", text: "text-[#31B98A]" },
-    mesh: { label: "School Mesh · Demo mode", border: "border-[#6541F5]/30", bg: "bg-[#6541F5]/10", text: "text-[#6541F5] dark:text-[#7C5CFA]" },
-    offline: { label: "Browser offline · Demo mode", border: "border-[#F4B942]/30", bg: "bg-[#F4B942]/10", text: "text-[#d97706] dark:text-[#F4B942]" },
+    online: { label: "Browser online · Demo mode", border: "border-[#19B99A]/30", bg: "bg-[#DDF8EE]", text: "text-[#19B99A]" },
+    mesh: { label: "School Mesh · Demo mode", border: "border-[#6541F5]/30", bg: "bg-[#EAE7FF]", text: "text-[#6541F5] dark:text-[#7C5CFA]" },
+    offline: { label: "Browser offline · Demo mode", border: "border-[#F5A623]/30", bg: "bg-[#FFF0D5]", text: "text-[#F5A623]" },
   }[status];
 
   return (
@@ -49,26 +49,13 @@ export function NetworkTag({ status = "online", className }: { status?: "online"
   );
 }
 
-export function PageHeader({ title, description, actions, eyebrow }: { title: string; description?: ReactNode; actions?: ReactNode; eyebrow?: ReactNode }) {
-  return (
-    <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between border-b border-border pb-5">
-      <div className="min-w-0">
-        {eyebrow && <div className="mb-2">{eyebrow}</div>}
-        <h1 className="text-2xl font-bold text-foreground md:text-3xl tracking-tight flex items-center gap-3">
-          {title}
-        </h1>
-        {description && <p className="mt-1.5 max-w-2xl text-[14px] text-muted-foreground">{description}</p>}
-      </div>
-      {actions && <div className="flex flex-wrap items-center gap-2.5">{actions}</div>}
-    </div>
-  );
-}
+export { PageHeader } from "@/components/shared/PageHeader";
 
 export function Panel({ title, action, children, className, as: As = "section" }: { title?: ReactNode; action?: ReactNode; children: ReactNode; className?: string; as?: "section" | "div" | "article" }) {
   return (
-    <As className={cn("card-surface p-5 bg-card text-card-foreground border-border shadow-sm", className)}>
+    <As className={cn("card-surface p-5 sm:p-6 bg-card text-card-foreground border-border shadow-sm", className)}>
       {(title || action) && (
-        <div className="mb-4 flex items-center justify-between gap-3 border-b border-border pb-3">
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-3 border-b border-border pb-3">
           {title && <h2 className="text-[16px] font-semibold text-foreground flex items-center gap-2">{title}</h2>}
           {action}
         </div>

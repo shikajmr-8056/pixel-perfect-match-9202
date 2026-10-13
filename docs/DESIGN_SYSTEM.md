@@ -95,7 +95,51 @@ Activated via `.dark` on `<html>`. Replaces white surfaces with rich charcoal to
 
 ## 5. Accessibility Rules
 
-1. **Contrast Compliance:** All text styles on light surfaces achieve WCAG AA contrast against `#FFFFFF` and `#F5F5FF`.
-2. **Reduced Motion:** If `reducedMotion` is toggled in Settings or system prefers reduced motion, transitions collapse to `0.01ms`.
+1. **Contrast Compliance:** All text styles on light surfaces achieve WCAG AA contrast against `#FFFFFF` and `#F5F5FA` (minimum 4.5:1 for body copy).
+2. **Reduced Motion:** When `reducedMotion` is toggled in Settings or system prefers reduced motion, transitions and animations collapse to `0.01ms`.
 3. **Scalable Text:** The `largeText` toggle scales HTML root font-size to `112.5%` for readability on low-resolution tablets.
-4. **Focus Rings:** High-visibility focus outline (`outline: 2px solid #6541F5; outline-offset: 2px;`).
+4. **Focus Rings:** High-visibility keyboard focus outline (`focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2`).
+5. **Touch Target Size:** Interactive buttons, tabs, and dismiss controls maintain a minimum target area of `44px × 44px` (or `36px × 36px` compact with surrounding padding).
+
+---
+
+## 6. Responsive Breakpoints & Viewport Matrix
+
+VidyaVerse is verified across five standard responsive widths to ensure equitable access across diverse rural and urban classroom hardware:
+
+| Breakpoint | Target Viewport | Target Device Profile | Layout Adaptations |
+| :--- | :--- | :--- | :--- |
+| **Small Mobile** | `~360px` | Entry-level Android, low-cost rural smartphones | Single-column stack, mobile drawer nav, horizontal tabs overflow scrolling, compact card padding (`p-4` or `p-5`), zero horizontal overflow |
+| **Standard Mobile** | `~390px` | Modern mobile phones (e.g. iPhone, Pixel) | Full-width cards, accessible touch targets, bottom bar shortcuts + drawer nav |
+| **Tablet Portrait** | `~768px` | Low-cost school tablets (DIKSHA / Samagra Shiksha) | Two-column grid where beneficial, sidebar collapses to icon/drawer, touch-friendly tab list |
+| **Tablet Landscape** | `~1024px` | Shared classroom displays & laptops | Collapsible sidebar expands, multi-column dashboard grid (8/4 split), detailed Recharts |
+| **Desktop / Monitor** | `~1440px` | Teacher desk PCs, smart TVs & projectors | Fixed 256px sidebar, centered `max-w-7xl` content constraint, comfortable white-space |
+
+---
+
+## 7. Component Standardization Rules
+
+### 7.1 Cards & Panels
+- **Container:** Always use `Panel` from `@/components/vv/primitives` or `card-surface` with `rounded-2xl border border-border bg-card text-card-foreground shadow-sm`.
+- **Padding:** Standard padding is `p-5 sm:p-6` (or `p-4` on compact sub-cards). Avoid nested cards inside cards that create visual clutter and double borders.
+- **Accents:** Semantic accents must correlate with subject or functional state (Blue for Math, Teal for Science, Pink for Language, Orange for Quests/Rewards). Do not apply arbitrary bright borders to generic cards.
+
+### 7.2 Dialogs & Modals
+- **Mobile Centering & Safe Max-Height:** `DialogContent` utilizes `w-[calc(100%-2rem)] max-w-lg max-h-[90vh] overflow-y-auto rounded-2xl p-5 sm:p-6`. This prevents modal clipping on small smartphone viewports.
+- **Close Button:** Positioned with `h-8 w-8 rounded-full` and touch target area for accessible dismissal.
+
+### 7.3 Tabs & Lists
+- **Tab Lists:** `TabsList` includes `overflow-x-auto scrollbar-none` to allow smooth finger swiping on mobile devices without generating page horizontal scrollbars.
+- **Active State:** Standardized on `data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-xs`.
+
+### 7.4 Form Inputs & Search Fields
+- **Input Dimensions:** `h-10 rounded-xl border border-border bg-background px-3.5 py-2 text-xs md:text-sm`.
+- **Focus State:** `focus-visible:ring-2 focus-visible:ring-ring` with primary purple accent ring.
+
+---
+
+## 8. Gamification Currency & Lifetime Progress Decoupling
+
+To safeguard pedagogical trust and student motivation:
+- **Lifetime XP (`d.xp`):** Represents permanent, monotonic cumulative academic effort. It is strictly never decremented or reset by marketplace purchases or weekly leaderboard rollover.
+- **Spendable Sparks (`d.sparks`):** Represents consumable reward tokens earned at 50% of gained XP. Bazaar transactions (e.g. avatars, solar system wallpapers) deduct solely from `d.sparks` while leaving `d.xp` intact.

@@ -20,17 +20,23 @@
 
 ---
 
-## 2. React 19 Component Architecture
+## 2. React 19 Component & Feature Architecture
 
-1. **Functional Components:** Always use modern functional components with hooks (`useState`, `useEffect`, `useCallback`, `useMemo`).
-2. **Import Ordering:**
+1. **Feature-Based Modular Structure (`src/features/*`):**
+   - Feature views and complex UI components reside in their designated directory under `src/features/<feature-name>/`.
+   - Each feature encapsulates its sub-components, dialogs, state handlers, and simulation engines.
+2. **Thin Routing Wrappers (`src/routes/*`):**
+   - TanStack route files in `src/routes/` serve solely as thin routing and page-composition layers (< 35 lines).
+   - Route files declare `createFileRoute`, route `loader`, `validateSearch`, SEO `head` metadata, and `notFoundComponent`, delegating the actual view rendering to the corresponding `src/features/*` component.
+3. **Functional Components:** Always use modern functional components with hooks (`useState`, `useEffect`, `useCallback`, `useMemo`).
+4. **Import Ordering:**
    ```typescript
    // 1. External frameworks & router
    import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
    import { useState, useEffect } from "react";
    
-   // 2. Icons
-   import { Bot, Sparkles, Trophy, ArrowRight } from "lucide-react";
+   // 2. Feature Views
+   import { DashboardView } from "@/features/dashboard/dashboard-view";
    
    // 3. UI Primitives & Components
    import { Button } from "@/components/ui/button";
@@ -41,9 +47,9 @@
    import { useDemo } from "@/lib/demo-store";
    
    // 5. Data & Constants
-   import { lessons, demoStudent } from "@/data/demo";
+   import { lessons, demoStudent, getSubjectTheme } from "@/data/demo";
    ```
-3. **Semantic HTML & Accessibility:**
+5. **Semantic HTML & Accessibility:**
    - Use `<main>`, `<nav>`, `<aside>`, `<section>`, `<article>`, `<header>`, and `<footer>`.
    - Accessible descriptions: Provide `aria-label` or `sr-only` descriptions on icon-only buttons.
    - Use `<dl>`, `<dt>`, `<dd>` for metrics and stat tiles.

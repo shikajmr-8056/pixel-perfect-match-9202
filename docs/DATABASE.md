@@ -84,12 +84,41 @@ Hands-on STEM portfolio submission:
 interface StudentProject {
   id: string;
   title: string;
-  category: "Electronics" | "Coding" | "Science" | "Mathematics";
+  category: "Electronics" | "Coding" | "Science" | "Math";
   date: string;
-  status: "completed" | "submitted" | "in-progress";
+  status: "completed" | "draft" | "submitted";
   xpEarned: number;
   description: string;
   skills: string[];
+}
+```
+
+### 1.6 `DemoState` (Client Persistence Model)
+Central state maintained in `@/types` and persisted via `safeStorage` in `localStorage`:
+```typescript
+interface DemoState {
+  role: "student" | "teacher" | "parent";
+  theme: "dark" | "light";
+  networkMode: "online" | "mesh" | "offline";
+  pendingSyncCount: number;
+  lastSyncTime: string;
+  xp: number;                                // Lifetime non-depleting experience points
+  sparks: number;                            // Spendable currency for Rewards Bazaar
+  weeklyXp: number;
+  completed: string[];                       // Completed lesson IDs
+  completedActivities: string[];             // Deduplication set preventing runaway XP loops
+  joined: string[];                          // Joined classroom codes
+  unlocked: AchievementId[];
+  downloads: Record<string, "none" | "downloading" | "saved">;
+  language: "en" | "hi" | "kn";
+  reducedMotion: boolean;
+  largeText: boolean;
+  notifyAssignments: boolean;
+  notifyStreak: boolean;
+  wifiOnlyDownloads: boolean;
+  redeemedItems: string[];
+  completedChallenges: string[];
+  projects: StudentProject[];
 }
 ```
 
